@@ -24,23 +24,31 @@ class ChapterManager extends DbManager
     }
     public function getAllChaptersWithComs()
     {
-        $request  = $this->db->query('SELECT ch.id, ch.title, ch.content, ch.date, co.id AS com_id, co.post_id AS com_post_id, co.author AS com_author, co.content AS com_content FROM chapters ch LEFT JOIN comments co ON ch.id = co.post_id');
+        $request  = $this->db->query('SELECT ch.id, ch.title, ch.content, ch.date_add, co.id AS com_id, co.post_id AS com_post_id, co.author AS com_author, co.content AS com_content FROM chapters ch LEFT JOIN comments co ON ch.id = co.post_id');
         $results = $request->fetchAll(PDO::FETCH_ASSOC);
         return $results;
     }
     public function getChapter($id)
     {
-        $request  = $this->db->prepare('SELECT ch.id, ch.title, ch.content, ch.date, co.id AS com_id, co.post_id AS com_post_id, co.author AS com_author, co.content AS com_content, DATE_FORMAT(co.date, \'%d/%m/%Y à %H:%i\') as com_date FROM chapters ch LEFT JOIN comments co ON ch.id = co.post_id WHERE ch.id=?');
+        $request  = $this->db->prepare('SELECT ch.id, ch.title, ch.content, ch.date_add, co.id AS com_id, co.post_id AS com_post_id, co.author AS com_author, co.content AS com_content, co.report as com_report, co.moderate as com_moderate, DATE_FORMAT(co.date_add, \'%d/%m/%Y à %H:%i\') as com_date_add FROM chapters ch LEFT JOIN comments co ON ch.id = co.post_id WHERE ch.id=?');
         $request->execute([$id]);
         $result = $request->fetchAll(PDO::FETCH_ASSOC);
         $comments = [];
         $chapter = new Chapter();
+        $chapter->setId($result[0]['id']);
+        $chapter->setTitle($result[0]['title']);
+        $chapter->setContent($result[0]['content']);
+        $chapter->setDate($result[0]['date_add']);
         foreach($result as $data){
-            if($data['com_id']){
+            if(isset($data['com_id'])){
                 $comment = new Comment();
-                $comment->setId($data['com_id']]);
-                // Pareil pour les autres
-
+                $comment->setId($data['com_id']);
+                $comment->setPostId($data['com_post_id']);
+                $comment->setAuthor($data['com_author']);
+                $comment->setComment($data['com_content']);
+                $comment->setReport($data['com_report']);
+                $comment->setModerate($data['com_moderate']);
+                $comment->setDateAdd($data['com_date_add']);
                 $comments[] = $comment;
             }
         } 

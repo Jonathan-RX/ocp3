@@ -12,9 +12,9 @@ class CommentManager extends DbManager
         $this->db = self::dbConnect();
     }
 
-    public function addComment($postId, $author, $comment){ // Comment $comment
-        $request = $this->db->prepare('INSERT INTO comments(post_id, author, content, report, date) VALUES(?, ?, ?, false, NOW())');
-        $results = $request->execute([$postId, $author, $comment]); // Remplacer [$postId, $author, $comment] par [$comment->getPostId(), $comment->getAuthor(), $comment->getComment()]
+    public function addComment(Comment $comment){
+        $request = $this->db->prepare('INSERT INTO comments(post_id, author, content, report, date_add) VALUES(?, ?, ?, false, NOW())');
+        $results = $request->execute([$comment->getPostId(), $comment->getAuthor(), $comment->getComment()]); 
         return $results;
     }
 

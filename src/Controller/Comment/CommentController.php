@@ -3,14 +3,17 @@
 namespace App\Controller\Comment;
 
 use App\Model\CommentManager;
+use App\Model\Comment;
 
 class CommentController{
     public function postComment($id){
         if(isset($_POST['author']) && isset($_POST['comment']) && isset($_POST['postId'])){
             $data = new CommentManager();
-            // Instance classe comment à ajouter
-            // SETTERS classe ccmment
-            $request = $data->addComment($_POST['postId'], $_POST['author'], $_POST['comment']); //Envoyer un objet au lieu des variables
+            $comment = new Comment();
+            $comment->setPostId($_POST['postId']);
+            $comment->setAuthor($_POST['author']);
+            $comment->setComment($_POST['comment']);
+            $request = $data->addComment($comment);
             if($request != false){
                 header('Location: chapitre-' . $id . '?comment=success');
             }else{
