@@ -13,11 +13,11 @@ $router->get('/', "Home#home");
 
 $router->get('/chapitre-:id', "Chapter#chapter");
 
-$router->get('/chapitre/:slug', "Chapter#chapter");
+$router->get('/chapitre/:slug', "Chapter#chapterBySlug");
 
-$router->get('/chapitre-:postId/reportComment-:commentId', "Comment#reportComment");
+$router->get('/chapitre/:slug/reportComment=:commentId', "Comment#reportComment")->with('commentId', '[0-9]+')->with('slug', '([a-z\-0-9]+)');
 
-$router->post('/chapitre-:id', "Comment#postComment");
+$router->post('/chapitre/:slug', "Comment#postComment");
 
 $router->get('/:unknow', "Error#pageUnknow");
 

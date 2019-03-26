@@ -12,7 +12,7 @@ ob_start();
     <?php foreach($chapter->getComments() as $c) :
         if(!empty($c->getId())) : ?>
     <p>
-        <b>Le <?= $c->getDateAdd(); ?> par <?= $c->getAuthor(); ?></b> (<a href="chapitre-<?=  $chapter->getId(); ?>/reportComment-<?= $c->getId(); ?>" onclick="return confirm('Etes-vous sur de vouloir signaler ce commentaire?')">Signaler ce commentaire</a>)<br />
+        <b>Le <?= $c->getDateAdd(); ?> par <?= $c->getAuthor(); ?></b> (<a href="/chapitre/<?=  $chapter->getSlug(); ?>/reportComment=<?= $c->getId(); ?>" onclick="return confirm('Etes-vous sur de vouloir signaler ce commentaire?')">Signaler ce commentaire</a>)<br />
     <?= $c->getComment(); ?>
     </p>
     <?php else :

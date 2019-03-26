@@ -5,6 +5,7 @@ namespace App\Model;
 class Chapter{
     private $id;
     private $title;
+    private $slug;
     private $content;
     private $date;
     private $comments = [];
@@ -51,6 +52,15 @@ class Chapter{
     public function setTitle($title): void
     {
         $this->title = $title;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+    public function setSlug($slug): void
+    {
+        $this->slug = $slug;
     }
 
     public function getContent(): ?string
