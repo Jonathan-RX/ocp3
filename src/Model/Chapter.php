@@ -62,6 +62,15 @@ class Chapter{
         $this->content = $content;
     }
 
+    public function getComments()
+    {
+        return $this->comments;
+    }
+    public function setComments($comments): void
+    {
+        $this->comments = $comments;
+    }
+
     public function getDate()
     {
         return $this->date;

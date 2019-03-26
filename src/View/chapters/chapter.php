@@ -4,16 +4,16 @@ ob_start();
 
 <section>
     <a href="/">Retour à l'accueil</a>
-    <h2><?= $chapter['0']['title']; ?></h2>
-    <p><?= $chapter['0']['content']; ?></p>
+    <h2><?= $chapter->getTitle(); ?></h2>
+    <p><?= $chapter->getContent(); ?></p>
 </section>
 <section>
 <?php if(isset($_GET['reportComment']) && $_GET['reportComment'] === 'success'){echo '<h3>Le commentaire à bien été signalé.</h3>';} ?>
-    <?php foreach($chapter as $c) :
-        if(!empty($c['com_id'])) : ?>
+    <?php foreach($chapter->getComments() as $c) :
+        if(!empty($c->getId())) : ?>
     <p>
-        <b>Le <?= $c['com_date']; ?> par <?= $c['com_author']; ?></b> (<a href="chapitre-<?=  $chapter['0']['id']; ?>/reportComment-<?= $c['com_id']; ?>" onclick="return confirm('Etes-vous sur de vouloir signaler ce commentaire?')">Signaler ce commentaire</a>)<br />
-    <?= $c['com_content']; ?>
+        <b>Le <?= $c->getDateAdd(); ?> par <?= $c->getAuthor(); ?></b> (<a href="chapitre-<?=  $chapter->getId(); ?>/reportComment-<?= $c->getId(); ?>" onclick="return confirm('Etes-vous sur de vouloir signaler ce commentaire?')">Signaler ce commentaire</a>)<br />
+    <?= $c->getComment(); ?>
     </p>
     <?php else :
         ?>
@@ -32,7 +32,7 @@ ob_start();
         <input type="text" name="author" /><br /> 
         Votre commentaire :<br />
         <textarea name="comment"></textarea><br />
-        <input type="hidden" name="postId" value="<?=  $chapter['0']['id']; ?>" />
+        <input type="hidden" name="postId" value="<?=  $chapter->getId(); ?>" />
         <input type="submit" value="Enregistrer" />
     </form>
 </section>

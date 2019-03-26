@@ -13,6 +13,8 @@ $router->get('/', "Home#home");
 
 $router->get('/chapitre-:id', "Chapter#chapter");
 
+$router->get('/chapitre/:slug', "Chapter#chapter");
+
 $router->get('/chapitre-:postId/reportComment-:commentId', "Comment#reportComment");
 
 $router->post('/chapitre-:id', "Comment#postComment");
@@ -45,7 +47,7 @@ if($url === ''){
 */
 
 /* Code établit avec Thibaut pour un routeur très basique, url = chapitres?id=1
-// }elseif($url === 'chapitre'){
-//     $chapter = new App\Controller\Chapter\ChapterController();
-//     $chapter->chapter($_GET['id']);
-// }
+}elseif($url === 'chapitre'){
+    $chapter = new App\Controller\Chapter\ChapterController();
+    $chapter->chapter($_GET['id']);
+}*/
