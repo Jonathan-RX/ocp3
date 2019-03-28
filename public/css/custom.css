@@ -29,7 +29,8 @@ Text Domain: blackandwhite
  * 8.0 - Mobile Menu
  * 9.0 - Contact Page Social
  * 10.0 - Contact Form
- * 11.0 - Media Query
+ * 11.0 - OCP3 Project
+ * 12.0 - Media Query
  */
 
 /**
@@ -756,9 +757,25 @@ figure {
 .btn-5b:hover:before {
 	left: 0;
 }
+/**
+ * 11.0 - OCP3 project
+ */
+
+.comments, .comments p{
+	font-family: 'Lato', sans-serif;
+	font-weight: 300;
+}
+
+.comments a:hover{
+	color: red;
+}
+
+.comments input, .comments textarea{
+	min-width:30%;
+}
 
 /**
- * 11.0 - Media Query
+ * 12.0 - Media Query
  */
 
 @media (max-width: 991px) {
@@ -798,6 +815,11 @@ figure {
 	}
 
 	.post {
+		background: #fff;
+		padding: 0 10px 0;
+	}
+
+	.comments {
 		background: #fff;
 		padding: 0 10px 0;
 	}

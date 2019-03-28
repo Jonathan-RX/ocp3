@@ -23,4 +23,10 @@ class CommentManager extends DbManager
         $results = $request->execute([$commentId]);
         return $results;
     }
+
+    public function count($postId){
+        $request = $this->db->prepare('SELECT COUNT(*) AS commentNumber FROM comments WHERE post_id=?');
+        $request->execute([$postId]);
+        return $request->fetchColumn();
+    }
 }
