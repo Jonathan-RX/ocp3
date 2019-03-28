@@ -13,11 +13,12 @@ class ChapterManager extends DbManager
     }
     public function getAllChapters()
     {
-        $request  = $this->db->query('SELECT * FROM chapters ORDER BY id');
+        $request  = $this->db->query('SELECT * FROM chapters ORDER BY id DESC');
         $results = $request->fetchAll(PDO::FETCH_ASSOC);
         $chapters = [];
         foreach($results as $r){
             $chapt = new Chapter($r);
+            $chapt->setDate($r['date_add']);
             $chapters[] = $chapt;
         }
         return $chapters;
