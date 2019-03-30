@@ -774,6 +774,57 @@ figure {
 	min-width:30%;
 }
 
+.pages {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.pages li {
+	display: inline-block;
+    margin-right: 10px;
+    margin-bottom: 20px;
+}
+
+.pages li a {
+	border: 1px solid #888;
+	padding:5px 10px;
+	font-size: 22px;
+	color: #888;
+	transition: all 0.3s ease-in;
+}
+.pages li a.self {
+	border: 1px solid #888;
+	padding:5px 10px;
+	font-size: 22px;
+	background-color: #333;
+	color: #fff;
+	transition: all 0.3s ease-in;
+}
+
+.pages li a:hover {
+	background-color: #333;
+	color: #fff;
+}
+
+.img-home{
+	margin:20px;
+}
+
+.main-nav a, .logo a, .ion-navicon, .entry-title, .entry-title a, .read-more a {
+	color: #09234b !important;
+}
+
+html, #site-footer, .copyright, .copyright a{
+	background: #09234b;
+	color: #fff;
+}
+
+.copyright a:hover{
+	text-decoration: underline;
+}
+
 /**
  * 12.0 - Media Query
  */

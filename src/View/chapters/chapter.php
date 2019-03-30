@@ -5,7 +5,6 @@ $comanager = new App\Model\CommentManager();
 $count = $comanager->count($chapter->getId());
 if($count > 1){$count = $count . ' Commentaires';}else{$count = $count . ' Commentaire';}
 ?>
-
                         <article class="post post-1">
 							<header class="entry-header">
 								<h1 class="entry-title"><?= $chapter->getTitle(); ?></h1>
@@ -17,7 +16,7 @@ if($count > 1){$count = $count . ' Commentaires';}else{$count = $count . ' Comme
 								</div>
 							</header>
 							<div class="entry-content clearfix">
-                            <?= $chapter->getContent(); ?>
+                            <?= nl2br($chapter->getContent()); ?>
 							</div>
 						</article>
 
@@ -26,20 +25,26 @@ if($count > 1){$count = $count . ' Commentaires';}else{$count = $count . ' Comme
         <h1 class="entry-title">Commentaires</h1>
     </header>
 <?php if(isset($_GET['reportComment']) && $_GET['reportComment'] === 'success'){echo '<h3>Le commentaire à bien été signalé.</h3>';} ?>
-    <?php foreach($chapter->getComments() as $c) :
-        if(!empty($c->getId())) : ?>
+    <?php 
+        if(!empty($chapter->getComments())) : 
+            foreach($chapter->getComments() as $c) :       
+    ?>
     <p>
         <b>Le <?= $c->getDateAdd(); ?> par <?= $c->getAuthor(); ?></b> (<a href="/chapitre/<?=  $chapter->getSlug(); ?>/reportComment=<?= $c->getId(); ?>" onclick="return confirm('Etes-vous sur de vouloir signaler ce commentaire?')">Signaler ce commentaire</a>)<br />
     <?= $c->getComment(); ?>
     </p>
-    <?php else :
+    <?php 
+            endforeach;
+        else :
         ?>
     <p>
         <h4>Ce chapitre ne comporte aucun commentaire</h4>
         soyez le premier à laisser le votre
     </p>
-        <?php
-    endif;endforeach; ?>
+    <?php
+            
+        endif;
+     ?>
 </section>
 <?php if(isset($_GET['comment']) && $_GET['comment'] === 'success'){echo '<h3>Le commentaire à bien été ajouté.</h3>';} ?>
 <section class="comments">
@@ -55,6 +60,9 @@ if($count > 1){$count = $count . ' Commentaires';}else{$count = $count . ' Comme
         <input type="submit" value="Enregistrer" />
     </form>
 </section>
+<ul class="pages">
+        <li></li>
+</ul>
 <?php
 $title = $chapter->getTitle();
 $content = ob_get_clean();
