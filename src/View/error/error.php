@@ -9,6 +9,7 @@ ob_start();
 
 </section>
 <?php
+$title = 'Erreur';
 $content = ob_get_clean();
-require('src/View/layout.php');
+require('src/View/full-width.php');
 ?>

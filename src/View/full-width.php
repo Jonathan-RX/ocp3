@@ -40,21 +40,12 @@
 							<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
   								<ul class="nav navbar-nav navbar-right">
     								<li class="cl-effect-11"><a href="/" data-hover="Accueil">Accueil</a></li>
-    								<li class="cl-effect-11"><a href="full-width.html" data-hover="Blog">Blog</a></li>
-    								<li class="cl-effect-11"><a href="about.html" data-hover="About">About</a></li>
-    								<li class="cl-effect-11"><a href="contact.html" data-hover="Contact">Contact</a></li>
+    								<li class="cl-effect-11"><a href="/about" data-hover="Auteur">Auteur</a></li>
+    								<li class="cl-effect-11"><a href="/chapitres" data-hover="Chapitres">Chapitres</a></li>
+    								<li class="cl-effect-11"><a href="/contact" data-hover="Contact">Contact</a></li>
   								</ul>
 							</div><!-- /.navbar-collapse -->
 						</nav>
-						<div id="header-search-box">
-							<a id="search-menu" href="#"><span id="search-icon" class="ion-ios-search-strong"></span></a>
-							<div id="search-form" class="search-form">
-								<form role="search" method="get" id="searchform" action="#">
-									<input type="search" placeholder="Search" required>
-									<button type="submit"><span class="ion-ios-search-strong"></span></button>
-								</form>				
-							</div>
-						</div>
 					</div><!-- col-md-8 -->
 				</div>
 			</header>
@@ -73,7 +64,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
-						<p class="copyright">&copy; 2014 ThemeWagon.com</p>
+						<p class="copyright">&copy; 2014 ThemeWagon.com <a href="/legals">Mentions légales</a></p>
 					</div>
 				</div>
 			</div>
@@ -84,15 +75,15 @@
 			<button type="button" class="overlay-close"><span class="ion-ios-close-empty"></span></button>
 			<nav>
 				<ul>
-					<li><a href="index.html">Home</a></li>
-					<li><a href="full-width.html">Blog</a></li>
-					<li><a href="about.html">About</a></li>
-					<li><a href="contact.html">Contact</a></li>
+					<li><a href="/">Accueil</a></li>
+					<li><a href="/about">Auteur</a></li>
+					<li><a href="/chapitres">Chapitres</a></li>
+					<li><a href="/contact">Contact</a></li>
 				</ul>
 			</nav>
 		</div>
 
-		<script src="js/script.js"></script>
+		<script src="/public/js/script.js"></script>
 
 	</body>
 </html>
