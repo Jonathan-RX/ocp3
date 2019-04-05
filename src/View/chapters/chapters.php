@@ -55,5 +55,5 @@ while($count < $nbrPages){
 <?php
 $title = 'Liste des chapitres';
 $content = ob_get_clean();
-require('src/View/full-width.php');
+require('src/View/layout.php');
 ?>

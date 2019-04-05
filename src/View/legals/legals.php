@@ -16,7 +16,7 @@ ob_start();
 
                             <h3>0. Informations générales:</h3>
 
-                            <p>Le site http://ocp3.jr-dev.fr, la ville de Silverkeep et toutes les informations associées sont imagés dans le cadre d’un projet d’étude de Jonathan RAVIX. Toute ressemblance avec un site internet ou une ville existante ne sont que pure coïncidence.</p>
+                            <p>Le site http://ocp3.jr-dev.fr, le nom "Jean Forteroche" et toutes les informations associées sont imagés dans le cadre d’un projet d’étude de Jonathan RAVIX. Toute ressemblance avec un site internet ou une personne existante ne sont que pure coïncidence.</p>
 
                             <h3>1. Informations légales :</h3>
 
@@ -71,7 +71,7 @@ ob_start();
 
 
 <?php
-$title = 'Accueil';
+$title = 'Mentions légales';
 $content = ob_get_clean();
-require('src/View/full-width.php');
+require('src/View/layout.php');
 ?>

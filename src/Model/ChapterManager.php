@@ -55,6 +55,12 @@ class ChapterManager extends DbManager
         return $request->fetchColumn()/5;
     }
 
+    public function countChapters(){
+        $request = $this->db->prepare('SELECT COUNT(*) AS chapterNumber FROM chapters');
+        $request->execute();
+        return $request->fetchColumn();
+    }
+
     public function constructChapter($result){
         if(!empty($result[0]['id'])){
             $comments = [];
@@ -65,7 +71,7 @@ class ChapterManager extends DbManager
             $chapter->setContent($result[0]['content']);
             $chapter->setDate($result[0]['date_add']);
             foreach($result as $data){
-                if(isset($data['com_id'])){
+                if($data['com_id']){
                     $comment = new Comment();
                     $comment->setId($data['com_id']);
                     $comment->setPostId($data['com_post_id']);
@@ -84,29 +90,4 @@ class ChapterManager extends DbManager
             return $chapter;
         }
     }
-
-
-    /* Fonctions Obsolètes
-
-    public function getAllChapters()
-    {
-        $request  = $this->db->query('SELECT * FROM chapters ORDER BY id DESC');
-        $results = $request->fetchAll(PDO::FETCH_ASSOC);
-        $chapters = [];
-        foreach($results as $r){
-            $chapt = new Chapter($r);
-            $chapt->setDate($r['date_add']);
-            $chapters[] = $chapt;
-        }
-        return $chapters;
-    }
-
-    public function getAllChaptersWithComs()
-    {
-        $request  = $this->db->query('SELECT ch.id, ch.title, ch.slug, ch.content, ch.date_add, co.id AS com_id, co.post_id AS com_post_id, co.author AS com_author, co.content AS com_content FROM chapters ch LEFT JOIN comments co ON ch.id = co.post_id');
-        $results = $request->fetchAll(PDO::FETCH_ASSOC);
-        return $results;
-    }
-
-    */
 }

@@ -25,6 +25,12 @@ $router->get('/chapitre/:slug', "Chapter#chapterBySlug");
 $router->get('/chapitre/:slug/reportComment=:commentId', "Comment#reportComment")->with('commentId', '[0-9]+')->with('slug', '([a-z\-0-9]+)');
 $router->post('/chapitre/:slug', "Comment#postComment");
 
-$router->get('/:unknow', "Error#pageUnknow");
+$router->get('/admin/dashboard', "AdminDashboard#adminDashboard");
+$router->get('/login', "AdminLogin#adminLogin");
+$router->post('/login', "AdminLogin#adminLoginOn");
+$router->get('/logout', "AdminLogin#adminLogout");
+
+
+$router->get('/:unknow', "Error#pageUnknow")->with('unknow', '([a-z\-0-9\-/]+)');
 
 $router->run();

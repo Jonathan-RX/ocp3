@@ -2,8 +2,8 @@
 ob_start();
 $date = new DateTime($chapter->getDate(),new DateTimeZone('Europe/Paris'));
 $comanager = new App\Model\CommentManager();
-$count = $comanager->count($chapter->getId());
-if($count > 1){$count = $count . ' Commentaires';}else{$count = $count . ' Commentaire';}
+$countComs = $comanager->count($chapter->getId());
+if($countComs > 1){$count = $countComs . ' Commentaires';}else{$count = $countComs . ' Commentaire';}
 ?>
                         <article class="post post-1">
 							<header class="entry-header">
@@ -13,6 +13,11 @@ if($count > 1){$count = $count . ' Commentaires';}else{$count = $count . ' Comme
 									<span class="post-date"><a href="#"><time class="entry-date" datetime="<?= $chapter->getDate(); ?>"><?= $date ->format('d/m/Y à H\hi') ?></time></a></span>
 			
 									<span class="comments-link"><a href="#comments"><?= $count; ?></a></span>
+                                    <?php
+                                        if($countComs > 9){
+                                            echo '<br /><span class="comments-link"><a href="#new-comment">Ajouter un commentaire</a></span>';
+                                        }
+                                    ?>
 								</div>
 							</header>
 							<div class="entry-content clearfix">
@@ -24,41 +29,52 @@ if($count > 1){$count = $count . ' Commentaires';}else{$count = $count . ' Comme
     <header class="entry-header">
         <h1 class="entry-title">Commentaires</h1>
     </header>
-<?php if(isset($_GET['reportComment']) && $_GET['reportComment'] === 'success'){echo '<h3>Le commentaire à bien été signalé.</h3>';} ?>
+    <?= \App\Services\PHPSession::get('reportComment'); ?>
     <?php 
         if(!empty($chapter->getComments())) : 
             foreach($chapter->getComments() as $c) :       
     ?>
-    <p>
-        <b>Le <?= $c->getDateAdd(); ?> par <?= $c->getAuthor(); ?></b> (<a href="/chapitre/<?=  $chapter->getSlug(); ?>/reportComment=<?= $c->getId(); ?>" onclick="return confirm('Etes-vous sur de vouloir signaler ce commentaire?')">Signaler ce commentaire</a>)<br />
-    <?= $c->getComment(); ?>
-    </p>
+    <div class="panel panel-default">
+            <div class="panel-heading"><b>Le <?= $c->getDateAdd(); ?> par <?= $c->getAuthor(); ?></b> <a href="/chapitre/<?=  $chapter->getSlug(); ?>/reportComment=<?= $c->getId(); ?>" onclick="return confirm('Etes-vous sur de vouloir signaler ce commentaire?')" title="Signaler ce commentaire"><i class="ion-alert-circled pull-right"></i></a></div>
+        <div class="panel-body">
+            <?php
+                if($c->getModerate() === '1'){
+                    echo '<i class="text-danger">Le contenu de ce commentaire à été modéré.</i>';
+                }else{
+                    echo $c->getComment(); 
+                }
+            ?>
+        </div>
+    </div>
     <?php 
             endforeach;
         else :
         ?>
-    <p>
-        <h4>Ce chapitre ne comporte aucun commentaire</h4>
-        soyez le premier à laisser le votre
-    </p>
+    <div class="panel panel-default">
+    <div class="panel-body">Ce chapitre ne comporte aucun commentaire, soyez le premier à laisser le votre !</div>
+    </div>
     <?php
             
         endif;
      ?>
 </section>
-<?php if(isset($_GET['comment']) && $_GET['comment'] === 'success'){echo '<h3>Le commentaire à bien été ajouté.</h3>';} ?>
-<section class="comments">
+<?= \App\Services\PHPSession::get('addComment'); ?>
+<section class="comments"  id="new-comment">
     <header class="entry-header">
         <h1 class="entry-title">Laisser un commentaire</h1>
     </header>
-    <form action="" method="POST">
-        Pseudonyme :<br />
-        <input type="text" name="author" /><br /> 
-        Votre commentaire :<br />
-        <textarea name="comment"></textarea><br />
-        <input type="hidden" name="postId" value="<?=  $chapter->getId(); ?>" />
-        <input type="submit" value="Enregistrer" />
-    </form>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form action="" method="POST" class="form-group">
+                <label for="author">Pseudonyme :</label>
+                <input type="text" name="author" id="author" class="form-control" /><br /> 
+                <label for="comment">Votre commentaire :</label>
+                <textarea name="comment" class="form-control" id="comment" rows="5"></textarea><br />
+                <input type="hidden" name="postId" value="<?=  $chapter->getId(); ?>" />
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </form>
+        </div>
+    </div>
 </section>
 <ul class="pages">
         <li></li>
@@ -66,5 +82,5 @@ if($count > 1){$count = $count . ' Commentaires';}else{$count = $count . ' Comme
 <?php
 $title = $chapter->getTitle();
 $content = ob_get_clean();
-require('src/View/full-width.php');
+require('src/View/layout.php');
 ?>
