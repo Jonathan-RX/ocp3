@@ -5,7 +5,7 @@ ob_start();
 						<article class="post">
 							<div class="entry-content clearfix">
 								<figure class="img-responsive-center">
-									<img class="img-responsive" src="/public/img/me.jpg" alt="Developer Image">
+									<img class="img-responsive" src="/public/img/jean.jpg" alt="Developer Image">
 								</figure>
 								<p>Responsive web design offers us a way forward, finally allowing us to design for the ebb and flow of things. There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don’t look even slightly.</p>
 								<p>Responsive web design offers us a way forward, finally allowing us to design for the ebb and flow of things. There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don’t look even slightly.</p>
@@ -23,5 +23,5 @@ ob_start();
 <?php
 $title = 'Auteur';
 $content = ob_get_clean();
-require('src/View/full-width.php');
+require('src/View/layout.php');
 ?>

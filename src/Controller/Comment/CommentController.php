@@ -5,6 +5,7 @@ namespace App\Controller\Comment;
 use App\Model\ChapterManager;
 use App\Model\CommentManager;
 use App\Model\Comment;
+use App\Services\PHPSession;
 
 class CommentController{
     public function postComment(){
@@ -18,7 +19,8 @@ class CommentController{
             $comment->setComment($_POST['comment']);
             $request = $data->addComment($comment);
             if($request != false){
-                header('Location: /chapitre/' . $c->getSlug() . '?comment=success');
+                PHPSession::set('addComment', '<h3>Le commentaire à bien été ajouté.</h3>');
+                header('Location: /chapitre/' . $c->getSlug() . '#comments');
             }else{
                 die('Impossible d\'ajouter le commentaire.');
             }
@@ -30,7 +32,8 @@ class CommentController{
         $chapter = new ChapterManager();
         $c = $chapter->getChapterBySlug($slug);
         if($request != false){
-            header('Location: /chapitre/' . $c->getSlug() . '?reportComment=success');
+            PHPSession::set('reportComment', '<h3>Le commentaire à bien été signalé.</h3>');
+            header('Location: /chapitre/' . $c->getSlug() . '#comments');
         }else{
             die('Impossible de signaler le commentaire.');
         }

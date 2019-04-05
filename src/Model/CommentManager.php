@@ -29,4 +29,17 @@ class CommentManager extends DbManager
         $request->execute([$postId]);
         return $request->fetchColumn();
     }
+
+    public function countComments(){
+        $request = $this->db->prepare('SELECT COUNT(*) AS commentNumber FROM comments');
+        $request->execute();
+        return $request->fetchColumn();
+    }
+    
+    public static function countReportedComments(){
+        $db = self::dbConnect();
+        $request = $db->prepare('SELECT COUNT(*) AS commentNumber FROM comments WHERE report=1 AND moderate IS null');
+        $request->execute();
+        return $request->fetchColumn();
+    }
 }

@@ -11,5 +11,5 @@ ob_start();
 <?php
 $title = 'Erreur';
 $content = ob_get_clean();
-require('src/View/full-width.php');
+require('src/View/layout.php');
 ?>
