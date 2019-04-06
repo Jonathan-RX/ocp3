@@ -29,6 +29,20 @@ class ChapterManager extends DbManager
         }
         return $chapters;
     }
+    
+    public function getAllChaptersWithComs()
+    {
+        $chapters = [];
+        $request  = $this->db->prepare('SELECT * FROM chapters ORDER BY id DESC');
+        $request->execute();
+        $results = $request->fetchAll(PDO::FETCH_ASSOC);
+        foreach($results as $r){
+            $chapt = new Chapter($r);
+            $chapt->setDate($r['date_add']);
+            $chapters[] = $chapt;
+        }
+        return $chapters;
+    }
 
     public function getChapter($id)
     {
@@ -59,6 +73,17 @@ class ChapterManager extends DbManager
         $request = $this->db->prepare('SELECT COUNT(*) AS chapterNumber FROM chapters');
         $request->execute();
         return $request->fetchColumn();
+    }
+    
+    public function deleteChapter($id){
+        $request = $this->db->prepare('DELETE FROM chapters WHERE id=?');
+        if($request->execute([$id])){
+            $request = $this->db->prepare('DELETE FROM comments WHERE post_id=?');
+            if($request->execute([$id])){
+                return true;
+            }
+        }
+        return false;
     }
 
     public function constructChapter($result){

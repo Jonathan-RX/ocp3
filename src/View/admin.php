@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/public/css/fontawesome-all.min.css">
     <link rel="stylesheet" href="/public/css/bootadmin.min.css">
     <link rel="stylesheet" href="/public/css/admin.css">
+    <link rel="stylesheet" href="/public/css/datatables.min.css">
+
 
     <title><?= $title; ?></title>
 </head>
@@ -54,7 +56,17 @@
 
 <script src="/public/js/jquery.min.js"></script>
 <script src="/public/js/bootstrap.bundle.min.js"></script>
+<script src="/public/js/datatables.min.js"></script>
 <script src="/public/js/bootadmin.min.js"></script>
+<script src="/public/js/admin.js"></script>
+<script src="/public/js/tinymce/tinymce.min.js"></script>
+  <script>tinymce.init({
+       selector:'.chapter-content',
+       language: 'fr_FR',
+       menubar: false,
+  force_br_newlines : true,
+  force_p_newlines : false });</script>
+
 
 </body>
 </html>
