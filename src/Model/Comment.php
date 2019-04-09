@@ -17,6 +17,12 @@ class Comment{
         }
     }
 
+    public function __set($name, $value) {
+        $method = 'set' . str_replace('_', '', $name);
+        if (method_exists($this, $method)) {
+            $val = call_user_func(array($this, $method), $value);
+        }
+    }
     public function hydrate(array $values)
     {
         foreach ($values as $key=>$value)

@@ -30,8 +30,16 @@ $router->post('/login', "AdminLogin#adminLoginOn");
 $router->get('/logout', "AdminLogin#adminLogout");
 $router->get('/admin/dashboard', "AdminDashboard#adminDashboard");
 $router->get('/admin/chapitres', "AdminChapters#adminChaptersController");
-$router->get('/admin/chapitre/:id', "AdminChapters#editChapter")->with('id', '([a-z\-0-9]+)');
-$router->get('/admin/supprimerchapitre/:id', "AdminChapters#deleteChapter");
+$router->get('/admin/nouveau-chapitre', "AdminNewChapter#newChapter");
+$router->post('/admin/nouveau-chapitre', "AdminChapterSubmit#newChapter");
+$router->get('/admin/chapitre/:id', "AdminChapters#editChapter");
+$router->post('/admin/chapitre/:id', "AdminChapterSubmit#updateChapter");
+$router->get('/admin/supprimerchapitre/:id', "AdminChapterSubmit#deleteChapter");
+$router->get('/admin/commentaire/moderer/:idComment/:url', "AdminCommentModerate#moderateComment")->with('url', '([a-z\-0-9\-/]+)');
+$router->get('/admin/commentaire/autoriser/:idComment/:url', "AdminCommentUnmoderate#unmoderateComment")->with('url', '([a-z\-0-9\-/]+)');
+$router->get('/admin/commentaire/rehabiliter/:idComment/:url', "AdminCommentUnreport#unreportComment")->with('url', '([a-z\-0-9\-/]+)');
+$router->get('/admin/commentaires', "AdminComments#adminCommentsController");
+$router->get('/admin/commentaires-moderes', "AdminCommentsModerates#adminCommentsModeratesController");
 
 
 $router->get('/:unknow', "Error#pageUnknow")->with('unknow', '([a-z\-0-9\-/]+)');

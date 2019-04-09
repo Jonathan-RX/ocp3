@@ -23,18 +23,23 @@ class AdminLoginController
     }
 
     public function adminLoginOn(){
-        if(preg_match ( " /^[^\W][a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,4}$/ " ,$_POST['email'])){
-            $usmanager = new UsersManager();
-            if($usmanager->checkUser($_POST['email'], $_POST['password'])){
-                PHPSession::set('login_token', true);
-                header('Location: /admin/dashboard');
-                return false;
+        if(isset($_POST['email']) AND isset($_POST['password'])){
+            if(preg_match ( " /^[^\W][a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,4}$/ " ,$_POST['email'])){
+                $usmanager = new UsersManager();
+                if($usmanager->checkUser($_POST['email'], $_POST['password'])){
+                    PHPSession::set('login_token', true);
+                    header('Location: /admin/dashboard');
+                    return false;
+                }else{
+                    PHPSession::set('flash', '<div class="alert alert-danger" role="alert">La combinaison de votre adresse et mot de passe saisis ne correspondent pas.</div>');
+                }
             }else{
-                PHPSession::set('flash', '<div class="alert alert-danger" role="alert">La combinaison de votre adresse et mot de passe saisis ne correspondent pas.</div>');
+                PHPSession::set('flash', '<div class="alert alert-danger" role="alert">L\'adresse saisie est invalide.</div>');
             }
+            require('src/View/admin/login/login.php');
         }else{
-            PHPSession::set('flash', '<div class="alert alert-danger" role="alert">L\'adresse saisie est invalide.</div>');
+            PHPSession::set('flash', '<div class="alert alert-danger" role="alert">Une erreur s\'est produite.</div>');
+            require('src/View/admin/login/login.php');
         }
-        require('src/View/admin/login/login.php');
     }
 }

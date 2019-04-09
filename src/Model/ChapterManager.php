@@ -74,6 +74,18 @@ class ChapterManager extends DbManager
         $request->execute();
         return $request->fetchColumn();
     }
+
+    public function addChapter(Chapter $chapter){
+        $request = $this->db->prepare('INSERT INTO chapters(title,slug,content,date_add) VALUES(?,?,?,NOW())');
+        $results = $request->execute([$chapter->getTitle(), $chapter->getSlug(), $chapter->getContent()]);
+        return $this->db->lastInsertId();
+    }
+
+    public function updateChapter(Chapter $chapter){
+        $request = $this->db->prepare('UPDATE chapters set title = ?, slug = ?, content = ? WHERE id=?');
+        $results = $request->execute([$chapter->getTitle(), $chapter->getSlug(), $chapter->getContent(),$chapter->getId()]);
+        return $results;
+    }
     
     public function deleteChapter($id){
         $request = $this->db->prepare('DELETE FROM chapters WHERE id=?');

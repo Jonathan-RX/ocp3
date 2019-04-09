@@ -10,7 +10,7 @@ if($countComs > 1){$count = $countComs . ' Commentaires';}else{$count = $countCo
 								<h1 class="entry-title"><?= $chapter->getTitle(); ?></h1>
 								<div class="entry-meta">
 			
-									<span class="post-date"><a href="#"><time class="entry-date" datetime="<?= $chapter->getDate(); ?>"><?= $date ->format('d/m/Y à H\hi') ?></time></a></span>
+									<span class="post-date"><a href="#"><time class="entry-date" datetime="<?= $chapter->getDate(); ?>"><?= $date->format('d/m/Y à H\hi') ?></time></a></span>
 			
 									<span class="comments-link"><a href="#comments"><?= $count; ?></a></span>
                                     <?php

@@ -2,3 +2,15 @@ a.border{
     color: black;
     text-decoration: none;
 }
+
+.fa-check-square{
+    color: green;
+}
+
+.fa-minus-square{
+    color: red;
+}
+
+.report{
+    background-color: #f7dada!important
+}

@@ -20,10 +20,11 @@ ob_start();
                 foreach($chapters as $chapter){
                     $comanager = new CommentManager();
                     $numberComment = $comanager->count($chapter->getId());
+                    $date = new DateTime($chapter->getDate(),new DateTimeZone('Europe/Paris'));
                     ?>
                     <tr>
                         <td><?= $chapter->getTitle(); ?></td>
-                        <td><?= $chapter->getDate(); ?></td>
+                        <td>le <time class="entry-date" datetime="<?= $chapter->getDate(); ?>"><?= $date->format('d/m/Y à H\hi') ?></time></td>
                         <td><?= $numberComment; ?></td>
                         <td>
                             <a href="/admin/chapitre/<?= $chapter->getId(); ?>" class="btn btn-icon btn-pill btn-primary" data-toggle="tooltip" title="Editer"><i class="fa fa-fw fa-edit"></i></a>
