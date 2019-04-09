@@ -829,6 +829,25 @@ html, #site-footer, .copyright, .copyright a{
 	text-decoration: underline;
 }
 
+.contact-form .form-inline{
+margin-top:-20px;
+margin-bottom:10px;
+}
+
+.contact-form .form-inline input {
+	border: 1px solid #aaa;
+	margin-bottom: 0px;
+	width: auto;
+	padding: auto;
+	line-height: auto;
+	position:absolute;
+	margin-top:12px;
+}
+.contact-form .form-inline label{
+	margin-left: 25px;
+	
+}
+
 
 /**
  * 12.0 - Media Query

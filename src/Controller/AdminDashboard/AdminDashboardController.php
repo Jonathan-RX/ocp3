@@ -12,6 +12,8 @@ class AdminDashboardController
         $numberChapter = $chmanager->countChapters();
         $comanager = new CommentManager();
         $numberComment = $comanager->countComments();
+        $lastComs = $comanager->getFiveLastComs();
+        $lastReports = $comanager->getFiveLastReports();
         require('src/View/admin/dashboard/dashboard.php');
 
     }

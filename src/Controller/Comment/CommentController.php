@@ -19,7 +19,7 @@ class CommentController{
             $comment->setComment($_POST['comment']);
             $request = $data->addComment($comment);
             if($request != false){
-                PHPSession::set('addComment', '<h3>Le commentaire à bien été ajouté.</h3>');
+                PHPSession::set('addComment', '<div class="alert alert-success">Le commentaire à bien été ajouté.</div>');
                 header('Location: /chapitre/' . $c->getSlug() . '#comments');
             }else{
                 die('Impossible d\'ajouter le commentaire.');
@@ -32,7 +32,7 @@ class CommentController{
         $chapter = new ChapterManager();
         $c = $chapter->getChapterBySlug($slug);
         if($request != false){
-            PHPSession::set('reportComment', '<h3>Le commentaire à bien été signalé.</h3>');
+            PHPSession::set('reportComment', '<div class="alert alert-success">Le commentaire à bien été signalé.</div>');
             header('Location: /chapitre/' . $c->getSlug() . '#comments');
         }else{
             die('Impossible de signaler le commentaire.');

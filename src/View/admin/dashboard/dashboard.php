@@ -1,6 +1,7 @@
 <?php 
 ob_start();
 ?>
+<?= \App\Services\PHPSession::get('alert'); ?>
 <div class="row mb-4">
         <div class="col-md">
             <a class="d-flex border" href="/admin/chapitres">
@@ -29,14 +30,48 @@ ob_start();
             </a>
         </div>
     </div>
-
-    <div class="card mb-4">
-            <div class="card-body">
-                        Vous êtes dans l'administration 
-                    </div>
+    <div class="d-flex flex-row">
+        <div class="mr-1 col">
+        <h4>5 derniers commentaires</h4>
+            <?php
+            foreach($lastComs as $c) :    
+            $date = new DateTime($c->getDateAdd(),new DateTimeZone('Europe/Paris'));
+            ?>
+            <div class="card mb-2 width-45%">
+                <div class="card-body">
+                    <h5 class="card-title">Par <?= $c->getAuthor(); ?></h5>
+                    <h6 class="card-subtitle mb-2 text-muted"><time class="entry-date" datetime="<?= $c->getDateAdd(); ?>">Le <?= $date->format('d/m/Y à H\hi') ?></time></h6>
+                    <p class="card-text"><?= $c->getComment(); ?></p>
+                    <a href="/admin/commentaire/moderer/<?= $c->getId(); ?>/dashboard/" class="card-link" data-toggle="tooltip" title="Cacher le contenu du commentaire"><i class="fas fa-minus-square"></i> Moderér</a>
+                </div>
+            </div>
+            <?php
+            endforeach;
+            ?>
+        </div>
+        <div class="ml-1 col">
+        <h4>5 derniers signalements</h4> 
+            <?php
+            foreach($lastReports as $c) :    
+            $date = new DateTime($c->getDateAdd(),new DateTimeZone('Europe/Paris'));
+            ?>
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h5 class="card-title">Par <?= $c->getAuthor(); ?></h5>
+                    <h6 class="card-subtitle mb-2 text-muted"><time class="entry-date" datetime="<?= $c->getDateAdd(); ?>">Le <?= $date->format('d/m/Y à H\hi') ?></time></h6>
+                    <p class="card-text"><?= $c->getComment(); ?></p>
+        
+                  <a href="/admin/commentaire/rehabiliter/<?= $c->getId(); ?>/dashboard/" class="card-link" data-toggle="tooltip" title="Retirer le signalement"><i class="fas fa-check-square"></i> Réhabiliter</a>
+                  <a href="/admin/commentaire/moderer/<?= $c->getId(); ?>/dashboard/" class="card-link" data-toggle="tooltip" title="Cacher le contenu du commentaire"><i class="fas fa-minus-square"></i> Modérer</a>
+                </div>
+            </div>
+            <?php 
+            endforeach;
+            ?>
+        </div>
     </div>
 <?php
-$title = 'Dashboard';
+$title = 'Tableau de bord';
 $content = ob_get_clean();
 require('src/View/admin.php');
 ?>

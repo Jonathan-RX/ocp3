@@ -12,8 +12,11 @@ ob_start();
 											<input type="email" name="email" placeholder="Email" required>
 											<input type="text" name="subject" placeholder="Sujet" required>
                                             <textarea name="message" rows="7" placeholder="Votre Message" required></textarea>
-                                            <input type="checkbox" name="data_privacy_consent" class="float-left" id="checkbox-privacy" required><label for="checkbox-privacy">Je consens à ce que mes données soumises soient recueillies et stockées comme décrit par le site .<br /></label>
-                                            <div class="g-recaptcha" data-sitekey="6Lc135oUAAAAAOeE3SHlgPI3BfWP6ysBtz7CsXFB"></div><br />
+                                            <div class="form-inline">
+												<input type="checkbox" name="data_privacy_consent" id="checkbox-privacy" required>
+												<label for="checkbox-privacy">Je consens à ce que mes données soumises soient recueillies et stockées comme décrit par le site .</label>
+                                            </div>
+											<div class="g-recaptcha" data-sitekey="6Lc135oUAAAAAOeE3SHlgPI3BfWP6ysBtz7CsXFB"></div><br />
 											<button class="btn-send btn-5 btn-5b ion-ios-paperplane"><span>Envoyer</span></button>
 										</div>
 									</div>	<!-- row -->
