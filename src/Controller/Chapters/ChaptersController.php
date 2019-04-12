@@ -7,6 +7,11 @@ use App\Controller\Error\ErrorController;
 
 class ChaptersController 
 {
+    /**
+     * Loads the chapters of a front end page and displays the rendering
+     *
+     * @param  mixed Page's number
+     */
     public function chapters($page = 1){
         $chmanager = new ChapterManager();
         $chapters = $chmanager->getFiveChaptersWithComs($page);

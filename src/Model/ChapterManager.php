@@ -7,11 +7,21 @@ class ChapterManager extends DbManager
 {
     private $db;
 
+    /**
+     * Builder, retrieves the connection to the database
+     */
     public function __construct()
     {
         $this->db = self::dbConnect();
     }
     
+    /**
+     * Retrieve and structure 5 chapters from the database
+     *
+     * @param  mixed Number of page to load
+     *
+     * @return array Chapiters list 
+     */
     public function getFiveChaptersWithComs($page)
     {
         $chapters = [];
@@ -30,6 +40,11 @@ class ChapterManager extends DbManager
         return $chapters;
     }
     
+    /**
+     * Retrieve and structure all chapters from the database
+     *
+     * @return array Chapters list
+     */
     public function getAllChaptersWithComs()
     {
         $chapters = [];
@@ -44,6 +59,13 @@ class ChapterManager extends DbManager
         return $chapters;
     }
 
+    /**
+     * Retrieve and structure one chapter by $id from the database
+     *
+     * @param  int Chapter's Id
+     *
+     * @return object Chapter informations
+     */
     public function getChapter($id)
     {
         $request  = $this->db->prepare('SELECT ch.id, ch.title, ch.slug, ch.content, ch.date_add, co.id AS com_id, co.post_id AS com_post_id, co.author AS com_author, co.content AS com_content, co.report as com_report, co.moderate as com_moderate, DATE_FORMAT(co.date_add, \'%d/%m/%Y à %H:%i\') as com_date_add FROM chapters ch LEFT JOIN comments co ON ch.id = co.post_id WHERE ch.id=?');
@@ -53,6 +75,13 @@ class ChapterManager extends DbManager
         return $chapter;
     }
 
+    /**
+     * Retrieve and structure one chapter by $slug from the database
+     *
+     * @param  string Chapter's slug
+     *
+     * @return object Chapter informations
+     */
     public function getChapterBySlug($slug)
     {
         $request  = $this->db->prepare('SELECT ch.id, ch.title, ch.slug, ch.content, ch.date_add, co.id AS com_id, co.post_id AS com_post_id, co.author AS com_author, co.content AS com_content, co.report as com_report, co.moderate as com_moderate, DATE_FORMAT(co.date_add, \'%d/%m/%Y à %H:%i\') as com_date_add FROM chapters ch LEFT JOIN comments co ON ch.id = co.post_id WHERE ch.slug=?');
@@ -62,6 +91,11 @@ class ChapterManager extends DbManager
         return $chapter;
     }
 
+    /**
+     * Calculation of the number of pages to display on the front side
+     *
+     * @return int Number of pages
+     */
     public function getNumberPages()
     {
         $request = $this->db->prepare('SELECT COUNT(*) AS chaptersNumber FROM chapters');
@@ -69,24 +103,50 @@ class ChapterManager extends DbManager
         return $request->fetchColumn()/5;
     }
 
+    /**
+     * Calculation of the number of chapters
+     *
+     * @return int Number of chapters
+     */
     public function countChapters(){
         $request = $this->db->prepare('SELECT COUNT(*) AS chapterNumber FROM chapters');
         $request->execute();
         return $request->fetchColumn();
     }
 
+    /**
+     * Insert a new chapter in the database
+     *
+     * @param  object Chapter
+     *
+     * @return int Id of the inserted chapter
+     */
     public function addChapter(Chapter $chapter){
         $request = $this->db->prepare('INSERT INTO chapters(title,slug,content,date_add) VALUES(?,?,?,NOW())');
         $results = $request->execute([$chapter->getTitle(), $chapter->getSlug(), $chapter->getContent()]);
         return $this->db->lastInsertId();
     }
-
+    
+    /**
+     * Update a chapter in the database
+     *
+     * @param  object Chapter
+     *
+     * @return bool True on Success, false on error
+     */
     public function updateChapter(Chapter $chapter){
         $request = $this->db->prepare('UPDATE chapters set title = ?, slug = ?, content = ? WHERE id=?');
         $results = $request->execute([$chapter->getTitle(), $chapter->getSlug(), $chapter->getContent(),$chapter->getId()]);
         return $results;
     }
     
+    /**
+     * Delete a chapter in the database
+     *
+     * @param  mixed Id of the chapter
+     *
+     * @return bool True on Successn false on error
+     */
     public function deleteChapter($id){
         $request = $this->db->prepare('DELETE FROM chapters WHERE id=?');
         if($request->execute([$id])){
@@ -98,6 +158,13 @@ class ChapterManager extends DbManager
         return false;
     }
 
+    /**
+     * Constructs a "Chapter" object from the information received as parameter
+     *
+     * @param  array Array of chapter values
+     *
+     * @return object Chapter object
+     */
     public function constructChapter($result){
         if(!empty($result[0]['id'])){
             $comments = [];

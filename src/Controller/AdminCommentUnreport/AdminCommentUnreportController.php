@@ -4,6 +4,12 @@ namespace App\Controller\AdminCommentUnreport;
 use App\Model\CommentManager;
 
 class AdminCommentUnreportController{
+    /**
+     * Removes reported status from a comment $idComment and redirects to $url
+     *
+     * @param  string Target comment Id
+     * @param  mixed Url for redirect
+     */
     public function unreportComment($idComment, $url){
         \App\Model\UsersManager::checkSession();
         if(CommentManager::unreportComment($idComment)){

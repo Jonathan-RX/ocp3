@@ -4,6 +4,12 @@ namespace App\Controller\AdminCommentModerate;
 use App\Model\CommentManager;
 
 class AdminCommentModerateController{
+    /**
+     * Change comment moderated status in database then redirect to an url
+     *
+     * @param  int Target comment ID
+     * @param  mixed Url for redirect
+     */
     public function moderateComment($idComment, $url){
         \App\Model\UsersManager::checkSession();
         if(CommentManager::moderateComment($idComment)){

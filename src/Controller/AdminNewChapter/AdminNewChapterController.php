@@ -6,6 +6,9 @@ use App\Model\CommentManager;
 
 class AdminNewChapterController 
 {
+    /**
+     * Loads the page for creating a chapter
+     */
     public function newChapter(){
         \App\Model\UsersManager::checkSession();
         $chapter = new \App\Model\Chapter();

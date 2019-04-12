@@ -4,6 +4,12 @@ namespace App\Controller\AdminCommentUnmoderate;
 use App\Model\CommentManager;
 
 class AdminCommentUnmoderateController{
+    /**
+     * Removes moderate status from a comment $idComment and redirects to $url
+     *
+     * @param  string Target comment Id
+     * @param  mixed Url for redirect
+     */
     public function unmoderateComment($idComment, $url){
         \App\Model\UsersManager::checkSession();
         if(CommentManager::unmoderateComment($idComment)){

@@ -5,7 +5,7 @@ namespace App\Services;
 class PHPSession{
 
     /**
-     * Assure que la Session est démarré
+     * Ensures the Session is started
      */
     private static function ensureStarted(){
         if(session_status() === PHP_SESSION_NONE){
@@ -13,10 +13,11 @@ class PHPSession{
         }
     }
      /**
-     * Récupère une information en Session puis l'efface
+     * Retrieves information in session and erases it
      * 
-     * @param string $key
-     * @return mixed
+     * @param string Name of the information
+     * 
+     * @return mixed Content of information, null if empty
      */
     public static function get(string $key){
         self::ensureStarted();
@@ -29,10 +30,11 @@ class PHPSession{
     }
     
      /**
-     * Récupère une information en Session sans l'effacer
+     * Retrieves information in session without erases it
      * 
-     * @param string $key
-     * @return mixed
+     * @param string Name of the information
+     * 
+     * @return mixed Content of information, null if empty
      */
     public static function check(string $key){
         self::ensureStarted();
@@ -43,11 +45,10 @@ class PHPSession{
     }
 
     /**
-     * Ajoute une information en Session
+     * Adds information in Session
      * 
-     * @param string $key
-     * @param $value
-     * @return
+     * @param string Name of the information
+     * @param mixed Content of information
      */
     public static function set(string $key, $value): void{
         self::ensureStarted();
@@ -55,8 +56,9 @@ class PHPSession{
     }
 
     /**
-     * Supprime une clef en Session
-     * @param string $key
+     * Deletes a information in Session
+     * 
+     * @param string Name of the information
      */
     public static function delete(string $key): void{
         self::ensureStarted();
