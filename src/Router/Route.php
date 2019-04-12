@@ -13,11 +13,26 @@ class Route{
         $this->callable = $callable;
     }
 
+    /**
+     * Specifies the format of the variables retrieved in the ur
+     *
+     * @param  string Parameter name
+     * @param  string Information to extract in the form of regex
+     *
+     * @return object Return object Route 
+     */
     public function with($param, $regex){
         $this->params[$param] = str_replace('(', '(?:', $regex);
         return $this;
     }
 
+    /**
+     * Check if an url is a valid route
+     *
+     * @param  string Url to check
+     * 
+     * @return bool True on success, false on fail
+     */
     public function match($url){
         $url = trim($url, '/');
         $path = preg_replace_callback('#:([\w]+)#', [$this, 'paramMatch'], $this->path);
@@ -30,6 +45,13 @@ class Route{
         return true;
     }
 
+    /**
+     * Check if a parameter is present in $this->params
+     *
+     * @param  mixed Parameter to check
+     *
+     * @return string Regex ready to use
+     */
     private function paramMatch($match){
         if(isset($this->params[$match[1]])){
             return '(' . $this->params[$match[1]] . ')';
@@ -37,6 +59,11 @@ class Route{
         return '([^/]+)';
     }
 
+    /**
+     * Retrieves the class to use, create a new instance
+     *
+     * @return void
+     */
     public function call(){
         if(is_string($this->callable)){
             $params = explode('#', $this->callable);

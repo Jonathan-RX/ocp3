@@ -15,6 +15,7 @@
 	</head>
 
 	<body>
+	<?=	\App\Services\AdminNavBar::getNavBar(); ?>
 		<div class="container">	
 			<header id="site-header">
 				<div class="row">

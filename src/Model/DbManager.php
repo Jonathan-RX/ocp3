@@ -5,6 +5,11 @@ use \PDO;
 
 class DbManager
 {
+    /**
+     * Initializes the connection to the database
+     *
+     * @return object PDO databse connection object
+     */
     protected function dbConnect()
     {
         try

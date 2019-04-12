@@ -71,6 +71,8 @@ if($countComs > 1){$count = $countComs . ' Commentaires';}else{$count = $countCo
                 <label for="comment">Votre commentaire :</label>
                 <textarea name="comment" class="form-control" id="comment" rows="5"></textarea><br />
                 <input type="hidden" name="postId" value="<?=  $chapter->getId(); ?>" />
+
+				<div class="g-recaptcha" data-sitekey="6Lc135oUAAAAAOeE3SHlgPI3BfWP6ysBtz7CsXFB"></div><br />
                 <button type="submit" class="btn btn-primary">Enregistrer</button>
             </form>
         </div>
@@ -79,6 +81,8 @@ if($countComs > 1){$count = $countComs . ' Commentaires';}else{$count = $countCo
 <ul class="pages">
         <li></li>
 </ul>
+<script src='https://www.google.com/recaptcha/api.js?hl=fr'></script>  
+
 <?php
 $title = $chapter->getTitle();
 $content = ob_get_clean();
