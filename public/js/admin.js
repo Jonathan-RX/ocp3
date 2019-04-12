@@ -1,13 +1,13 @@
 $(document).ready( function () {
     $('.change-slug').click(function(){
         if($(this).hasClass('active')){
-            slug = $('input[name=inputslug]').val();
+            var slug = $('input[name=inputslug]').val();
             $('input[name=inputslug]').remove();
             $('b.slug').html(slug);
             $('input[name=slug]').val(slug);
             $('.change-slug').html('Modifier').removeClass('active');
         }else{
-            slug = $('b.slug').html();
+            var slug = $('b.slug').html();
             $('b.slug').html('');
             $('<input type="text" name="inputslug" value="' + slug + '" />').insertBefore('.change-slug');
             $('.change-slug').html('Enregistrer').addClass('active');
