@@ -19,7 +19,7 @@ class AdminEditChapterController
             \App\Services\PHPSession::set('alert', '<div class="alert alert-warning" role="alert">Le chapitre n\'existe pas.</div>');
             header('Location: /admin/chapitres');
         }
-        require('src/View/admin/chapters/chapter.php');
+        require('src/View/admin/chapters/editChapter.php');
     }
 
     

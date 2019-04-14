@@ -8,6 +8,7 @@ ob_start();
             <table id="chapters" class="table table-hover" cellspacing="0" width="100%">
                 <thead>
                 <tr>
+                    <th>Numéro</th>
                     <th>Titre</th>
                     <th>Date</th>
                     <th>Commentaires</th>
@@ -17,12 +18,14 @@ ob_start();
                 <tbody>
 
                 <?php
+                $nbr = 1;
                 foreach($chapters as $chapter){
                     $comanager = new CommentManager();
                     $numberComment = $comanager->count($chapter->getId());
                     $date = new DateTime($chapter->getDate(),new DateTimeZone('Europe/Paris'));
                     ?>
                     <tr>
+                        <td><?= $nbr; ?></td>
                         <td><?= $chapter->getTitle(); ?></td>
                         <td>le <time class="entry-date" datetime="<?= $chapter->getDate(); ?>"><?= $date->format('d/m/Y à H\hi') ?></time></td>
                         <td><?= $numberComment; ?></td>
@@ -32,6 +35,7 @@ ob_start();
                         </td>
                     </tr>
                     <?php
+                    $nbr++;
                 }
                 ?>
                 </tbody>

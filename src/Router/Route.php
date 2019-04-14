@@ -62,7 +62,7 @@ class Route{
     /**
      * Retrieves the class to use, create a new instance
      *
-     * @return void
+     * @return object Instance for target route
      */
     public function call(){
         if(is_string($this->callable)){
@@ -75,6 +75,13 @@ class Route{
         }
     }
 
+    /**
+     * Extract data from the url
+     *
+     * @param  array Parameter to recover
+     *
+     * @return string Path treated
+     */
     public function getUrl($params){
         $path = $this->path;
         foreach($params as $k => $v){

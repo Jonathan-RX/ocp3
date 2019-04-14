@@ -41,7 +41,6 @@ class UsersManager extends DbManager{
         if(!PHPSession::check('login_token')){
             PHPSession::set('flash', '<div class="alert alert-danger" role="alert">Vous devez vous identifier pour accèder à l\'administration.</div>');
             header('Location: /login');
-            exit;
         }
     }
 }

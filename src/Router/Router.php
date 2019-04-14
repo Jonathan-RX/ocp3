@@ -22,7 +22,9 @@ class Router{
      *
      * @param  mixed Path of the url
      * @param  mixed Name of the class to call
-     * @param  mixed $name
+     * @param  mixed Route name
+     *
+     * @return object
      */
     public function get($path, $callable, $name = null){
         return $this->add($path, $callable, $name, 'GET');
@@ -31,9 +33,9 @@ class Router{
     /**
      * Manages a URL with a Post method
      *
-     * @param  mixed $path
-     * @param  mixed $callable
-     * @param  mixed $name
+     * @param  mixed Path of the url
+     * @param  mixed Name of the class to call
+     * @param  mixed Route name
      *
      * @return object
      */
@@ -42,14 +44,14 @@ class Router{
     }
 
     /**
-     * add
+     * Instance a route and add the url
      *
-     * @param  mixed $path
-     * @param  mixed $callable
-     * @param  mixed $name
-     * @param  mixed $method
+     * @param  mixed Path of the url
+     * @param  mixed Name of the class to call
+     * @param  mixed Route name
+     * @param  mixed Post or Get method
      *
-     * @return void
+     * @return object Route
      */
     private function add($path, $callable, $name, $method){
         $route = new Route($path, $callable);
@@ -64,7 +66,7 @@ class Router{
     }
 
     /**
-     * run
+     * Starts the function of the route
      */
     public function run(){
         if(!isset($this->routes[$_SERVER['REQUEST_METHOD']])){
@@ -78,6 +80,14 @@ class Router{
         throw new RouterException('No matching routes');
     }
 
+    /**
+     * Get route for url
+     *
+     * @param  string Name of route
+     * @param  array Parameters 
+     *
+     * @return string Return target route
+     */
     public function url($name, $params = []){
         if(!isset($this->namedRoutes[$name])){
             throw new RouterException('No route matches this name');

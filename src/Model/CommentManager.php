@@ -50,8 +50,8 @@ class CommentManager extends DbManager
      *
      * @return bool True on success, false on error
      */
-    public static function unreportComment($commentId){
-        $request = self::dbConnect()->prepare('UPDATE comments set report = 0 WHERE id=?');
+    public function unreportComment($commentId){
+        $request = $this->db->prepare('UPDATE comments set report = 0 WHERE id=?');
         $results = $request->execute([$commentId]);
         return $results;
     }
@@ -63,8 +63,8 @@ class CommentManager extends DbManager
      *
      * @return bool True on success, false on error
      */
-    public static function moderateComment($commentId){
-        $request = self::dbConnect()->prepare('UPDATE comments set moderate = 1, report = 0  WHERE id=?');
+    public function moderateComment($commentId){
+        $request = $this->db->prepare('UPDATE comments set moderate = 1, report = 0  WHERE id=?');
         $results = $request->execute([$commentId]);
         return $results;
     }
@@ -76,8 +76,8 @@ class CommentManager extends DbManager
      *
      * @return bool True on success, false on error
      */
-    public static function unmoderateComment($commentId){
-        $request = self::dbConnect()->prepare('UPDATE comments set moderate = 0 WHERE id=?');
+    public function unmoderateComment($commentId){
+        $request = $this->db->prepare('UPDATE comments set moderate = 0 WHERE id=?');
         $results = $request->execute([$commentId]);
         return $results;
     }
@@ -133,9 +133,8 @@ class CommentManager extends DbManager
      *
      * @return array All comments with reported status 
      */
-    public static function getReportedComments(){
-        $db = self::dbConnect();
-        $request = $db->prepare('SELECT * FROM comments WHERE report=1');
+    public function getReportedComments(){
+        $request = $this->db->prepare('SELECT * FROM comments WHERE report=1');
         $results = $request->execute();
         return $request->fetchAll(PDO::FETCH_CLASS, 'App\Model\Comment');
     }
@@ -145,9 +144,8 @@ class CommentManager extends DbManager
      *
      * @return array All comments with moderated status 
      */
-    public static function getModeratesComments(){
-        $db = self::dbConnect();
-        $request = $db->prepare('SELECT * FROM comments WHERE moderate=1 ORDER BY id DESC');
+    public  function getModeratesComments(){
+        $request = $this->db->prepare('SELECT * FROM comments WHERE moderate=1 ORDER BY id DESC');
         $results = $request->execute();
         return $request->fetchAll(PDO::FETCH_CLASS, 'App\Model\Comment');
     }
@@ -158,8 +156,7 @@ class CommentManager extends DbManager
      * @return int Number of comments with reported status
      */
     public static function countReportedComments(){
-        $db = self::dbConnect();
-        $request = $db->prepare('SELECT COUNT(*) AS commentNumber FROM comments WHERE report=1 AND moderate IS null');
+        $request = self::dbConnect()->prepare('SELECT COUNT(*) AS commentNumber FROM comments WHERE report=1 AND moderate=0');
         $request->execute();
         return $request->fetchColumn();
     }
