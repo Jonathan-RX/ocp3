@@ -28,6 +28,8 @@ $router->post('/chapitre/:slug', "PostComment#postComment");
 $router->get('/login', "AdminLogin#adminLogin");
 $router->post('/login', "AdminLoginOn#adminLoginOn");
 $router->get('/logout', "AdminLogout#adminLogout");
+$router->get('/reinitialisation-mot-de-passe', "AdminResetPassword#adminResetPassword");
+$router->post('/reinitialisation-mot-de-passe', "AdminResetPasswordSubmit#adminResetPasswordSubmit");
 $router->get('/admin/dashboard', "AdminDashboard#adminDashboard");
 $router->get('/admin/chapitres', "AdminChapters#adminChaptersController");
 $router->get('/admin/nouveau-chapitre', "AdminNewChapter#newChapter");

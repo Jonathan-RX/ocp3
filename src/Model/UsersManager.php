@@ -24,9 +24,9 @@ class UsersManager extends DbManager{
      *
      * @return bool True on success, false on fail
      */
-    public function checkUser($email, $password){
+    public function checkUser($login, $password){
         $request = $this->db->prepare('SELECT * FROM users WHERE login=?');
-        $request->execute([$email]);
+        $request->execute([$login]);
         $result = $request->fetch(PDO::FETCH_ASSOC);
         if(password_verify($password, $result['password']) ){
             return true;
@@ -42,5 +42,26 @@ class UsersManager extends DbManager{
             PHPSession::set('flash', '<div class="alert alert-danger" role="alert">Vous devez vous identifier pour accèder à l\'administration.</div>');
             header('Location: /login');
         }
+    }
+
+    /**
+     * Check if user exist, create a token if true
+     *
+     * @param  string User email
+     *
+     * @return string Token for success, false for fail
+     */
+    public function resetPassword($email){
+        $request = $this->db->prepare('SELECT * FROM users WHERE email=?');
+        $request->execute([$email]);
+        $result = $request->fetch(PDO::FETCH_ASSOC);
+        if($result){
+            $token = uniqid('', true);
+            $request = $this->db->prepare('UPDATE users set token = ?, token_date=NOW() WHERE email=?');
+            $results = $request->execute([$token, $email]);
+        }else{
+            $token = false;
+        }
+        return $token;
     }
 }

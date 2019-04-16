@@ -16,10 +16,10 @@ class AdminDeleteChapterController
         $chmanager = new ChapterManager();
         if($chmanager->deleteChapter($idChapter)){
             \App\Services\PHPSession::set('alert', '<div class="alert alert-success" role="alert">Le chapitre à bien été supprimé</div>');
-            header('Location: /admin/chapitres', 302); exit;
+            header('Location: /admin/chapitres');
         }else{
             \App\Services\PHPSession::set('alert', '<div class="alert alert-warning" role="alert">Une erreur s\'est produite.</div>');
-            header('Location: /admin/chapitres', 302); exit;
+            header('Location: /admin/chapitres');
         }
     }
 }
