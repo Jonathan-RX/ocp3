@@ -1,4 +1,2 @@
-src/Model/DbManager.php
-/src/Model/DbManager.php
-src/Services/ContactMail.php
-/src/Services/ContactMail.php
+src/config/Config.php
+/src/config/Config.php
