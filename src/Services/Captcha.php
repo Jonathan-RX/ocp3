@@ -28,4 +28,22 @@ class Captcha{
             return false;
         }
     }
+
+    /**
+     * Return Input for google captcha
+     *
+     * @return string Div for captcha box
+     */
+    public static function getCaptchaInput(){
+        return '<div class="g-recaptcha" data-sitekey="6Lc135oUAAAAAOeE3SHlgPI3BfWP6ysBtz7CsXFB"></div>';
+    }
+
+    /**
+     * Return Html for google captcha
+     *
+     * @return string Html script with google captcha api
+     */
+    public static function getCaptchaScript(){
+        return '<script src=\'https://www.google.com/recaptcha/api.js?hl=fr\'></script>';
+    }
 }

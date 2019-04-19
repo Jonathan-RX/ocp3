@@ -14,7 +14,7 @@ ob_start();
 
                             <div class="row mt-3">
                                 <div class="col pr-2">
-                                    <div class="g-recaptcha" data-sitekey="6Lc135oUAAAAAOeE3SHlgPI3BfWP6ysBtz7CsXFB"></div><br />
+                                <?= \App\Services\Captcha::getCaptchaInput(); ?>
                                 </div>
                             </div>
 
@@ -31,7 +31,7 @@ ob_start();
                                 </div>
                             </div>
                         </form>
-                        <script src='https://www.google.com/recaptcha/api.js?hl=fr'></script>  
+                        <?= \App\Services\Captcha::getCaptchaScript(); ?>  
 <?php
 $content = ob_get_clean();
 $title = 'Réinitilisation mot de passe';

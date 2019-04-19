@@ -16,14 +16,14 @@ ob_start();
 												<input type="checkbox" name="data_privacy_consent" id="checkbox-privacy" required>
 												<label for="checkbox-privacy">Je consens à ce que mes données soumises soient recueillies et stockées comme décrit par le site .</label>
                                             </div>
-											<div class="g-recaptcha" data-sitekey="6Lc135oUAAAAAOeE3SHlgPI3BfWP6ysBtz7CsXFB"></div><br />
+											<?= \App\Services\Captcha::getCaptchaInput(); ?><br />
 											<button class="btn-send btn-5 btn-5b ion-ios-paperplane"><span>Envoyer</span></button>
 										</div>
 									</div>	<!-- row -->
                                 </form>
 							</div>
                         </article>
-                        <script src='https://www.google.com/recaptcha/api.js?hl=fr'></script>  
+						<?= \App\Services\Captcha::getCaptchaScript(); ?>
 <?php
 $title = 'Contact';
 $content = ob_get_clean();
