@@ -18,7 +18,7 @@ class PostCommentController{
         $chapter = new ChapterManager();
         $c = $chapter->getChapter($_POST['postId']);
         if ($captcha) {
-            if(isset($_POST['author']) && isset($_POST['comment']) && isset($_POST['postId'])){
+            if(!empty($_POST['author']) AND !empty($_POST['comment']) AND !empty($_POST['postId'])){
                 
                 $data = new CommentManager();
                 $comment = new Comment();
@@ -29,10 +29,10 @@ class PostCommentController{
                 if($request != false){
                     PHPSession::set('addComment', '<div class="alert alert-success">Le commentaire à bien été ajouté.</div>');
                     header('Location: /chapitre/' . $c->getSlug() . '#comments');
-                }else{
-                    die('Impossible d\'ajouter le commentaire.');
                 }
             }
+                PHPSession::set('addComment', '<div class="alert alert-warning">Impossible d\'ajouter le commentaire. Veuillez vérifier les informations que vous avez saisies.</div>');
+                header('Location: /chapitre/' . $c->getSlug() . '#comments');
         }else{
             PHPSession::set('addComment', '<div class="alert alert-warning">Vous devez cocher le bouton anti robot.</div>');
             header('Location: /chapitre/' . $c->getSlug() . '#comments');
