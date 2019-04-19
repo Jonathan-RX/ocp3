@@ -4,6 +4,7 @@ namespace App\Model;
 
 use App\Services\PHPSession;
 use \PDO;
+use \DateTime;
 
 class UsersManager extends DbManager{
     private $db;
@@ -63,5 +64,41 @@ class UsersManager extends DbManager{
             $token = false;
         }
         return $token;
+    }
+
+    /**
+     * Check if the token exists and is no more than half an hour
+     *
+     * @param  string Token to check
+     *
+     * @return bool True on success, false on fail
+     */
+    public function checkToken($token){
+        $request = $this->db->prepare('SELECT * FROM users WHERE token=?');
+        $request->execute([$token]);
+        $result = $request->fetch(PDO::FETCH_ASSOC);
+        $now = time();
+        $tokenDate = strtotime($result['token_date']);
+        $diff = ($now - $tokenDate)/60;
+        if($result AND $result['token'] === $token AND $diff < 30){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * Update a user password by token
+     *
+     * @param  string New password
+     * @param  string Token of user to update
+     *
+     * @return bool True on success, false on fail
+     */
+    public function changePassword($newPassword, $token){
+        $pass = password_hash($newPassword, PASSWORD_BCRYPT);
+        $request = $this->db->prepare('UPDATE users SET password = ?, token = null, token_date = null WHERE token=?');
+        $results = $request->execute([$pass, $token]);
+        return $results;
     }
 }

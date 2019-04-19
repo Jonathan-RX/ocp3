@@ -30,6 +30,11 @@ $router->post('/login', "AdminLoginOn#adminLoginOn");
 $router->get('/logout', "AdminLogout#adminLogout");
 $router->get('/reinitialisation-mot-de-passe', "AdminResetPassword#adminResetPassword");
 $router->post('/reinitialisation-mot-de-passe', "AdminResetPasswordSubmit#adminResetPasswordSubmit");
+$router->get('/confirmation', "AdminCheckToken#adminCheckToken");
+$router->post('/confirmation', "AdminResetPasswordConfirm#adminResetPasswordConfirm");
+$router->get('/confirmation/:token', "AdminCheckToken#adminCheckToken");
+
+
 $router->get('/admin/dashboard', "AdminDashboard#adminDashboard");
 $router->get('/admin/chapitres', "AdminChapters#adminChaptersController");
 $router->get('/admin/nouveau-chapitre', "AdminNewChapter#newChapter");

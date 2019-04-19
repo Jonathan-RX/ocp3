@@ -12,12 +12,20 @@ class AdminResetPasswordSubmitController
      * Get the result of the reset password form, check if the mail is correct and send mail with unique token for reset password if true
      */
     public function adminResetPasswordSubmit(){
-        if(isset($_POST['email'])){
+        $secret = "6Lc135oUAAAAAOQwp5gGmJIrgu2gJQr9yAXR6jTQ";
+        $response = $_POST['g-recaptcha-response'];
+        $remoteip = $_SERVER['REMOTE_ADDR'];
+        $api_url = "https://www.google.com/recaptcha/api/siteverify?secret=" 
+            . $secret
+            . "&response=" . $response
+            . "&remoteip=" . $remoteip ;
+        
+        $decode = json_decode(file_get_contents($api_url), true);
+        if (isset($decode['success']) AND $decode['success'] == true AND isset($_POST['email'])){
             if(preg_match ( " /^[^\W][a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,4}$/ " ,$_POST['email'])){
                 $usmanager = new UsersManager();
                 $token = $usmanager->resetPassword($_POST['email']);
                 if($token){
-                    var_dump($token);
                     //envoi du mail
                     $message = "Bonjour, <br />
                     Une demande de réinitialisation du mot de passe associé à votre mail vient d'être soumise sur le site Jean Forteroche. <br /><br />
@@ -25,11 +33,11 @@ class AdminResetPasswordSubmitController
                     http://ocp3.jr-dev.fr/confirmation/$token <br /><br />
                     Si vous n'êtes pas à l'origine de cette demande, merci de ne pas en tenir compte.";
                     $mail  = new ContactMail();
-                    var_dump($mail->sendMailTo(
+                    $mail->sendMailTo(
                         $_POST['email'], 
                         'Reinitialisation du mot de passe de votre compte ' . $_POST['email'], 
                         $message
-                    ));
+                    );
                 }
             }
             PHPSession::set('flash', '<div class="alert alert-success" role="alert">Si l\'adresse mail existe, vous recevrez un lien vous permettant de réinitialiser votre mot de passe.</div>');
