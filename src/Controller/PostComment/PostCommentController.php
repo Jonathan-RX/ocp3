@@ -6,24 +6,18 @@ use App\Model\ChapterManager;
 use App\Model\CommentManager;
 use App\Model\Comment;
 use App\Services\PHPSession;
+use App\Services\Captcha;
 
 class PostCommentController{
     /**
      * Add a comment on a chapter and redirect to the chapter page
      */
     public function postComment(){
-        $secret = "6Lc135oUAAAAAOQwp5gGmJIrgu2gJQr9yAXR6jTQ";
-        $response = $_POST['g-recaptcha-response'];
-        $remoteip = $_SERVER['REMOTE_ADDR'];
-        $api_url = "https://www.google.com/recaptcha/api/siteverify?secret=" 
-            . $secret
-            . "&response=" . $response
-            . "&remoteip=" . $remoteip ;
-        
-        $decode = json_decode(file_get_contents($api_url), true);
+        $captchaService = new Captcha();
+        $captcha = $captchaService->checkCaptcha($_POST['g-recaptcha-response']);
         $chapter = new ChapterManager();
         $c = $chapter->getChapter($_POST['postId']);
-        if (isset($decode['success']) AND $decode['success'] == true) {
+        if ($captcha) {
             if(isset($_POST['author']) && isset($_POST['comment']) && isset($_POST['postId'])){
                 
                 $data = new CommentManager();
