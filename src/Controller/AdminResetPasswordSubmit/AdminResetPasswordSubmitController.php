@@ -4,6 +4,7 @@ namespace App\Controller\AdminResetPasswordSubmit;
 
 use App\Model\UsersManager;
 use App\Services\PHPSession;
+use App\Services\Captcha;
 use App\Services\ContactMail;
 
 class AdminResetPasswordSubmitController
@@ -12,16 +13,9 @@ class AdminResetPasswordSubmitController
      * Get the result of the reset password form, check if the mail is correct and send mail with unique token for reset password if true
      */
     public function adminResetPasswordSubmit(){
-        $secret = "6Lc135oUAAAAAOQwp5gGmJIrgu2gJQr9yAXR6jTQ";
-        $response = $_POST['g-recaptcha-response'];
-        $remoteip = $_SERVER['REMOTE_ADDR'];
-        $api_url = "https://www.google.com/recaptcha/api/siteverify?secret=" 
-            . $secret
-            . "&response=" . $response
-            . "&remoteip=" . $remoteip ;
-        
-        $decode = json_decode(file_get_contents($api_url), true);
-        if (isset($decode['success']) AND $decode['success'] == true AND isset($_POST['email'])){
+        $captchaService = new Captcha();
+        $captcha = $captchaService->checkCaptcha($_POST['g-recaptcha-response']);
+        if ($captcha AND isset($_POST['email'])){
             if(preg_match ( " /^[^\W][a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\@[a-zA-Z0-9_]+(\.[a-zA-Z0-9_]+)*\.[a-zA-Z]{2,4}$/ " ,$_POST['email'])){
                 $usmanager = new UsersManager();
                 $token = $usmanager->resetPassword($_POST['email']);

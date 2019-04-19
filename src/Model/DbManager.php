@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Model;
+use App\config\Config;
 use \PDO;
 
 class DbManager
@@ -12,9 +13,10 @@ class DbManager
      */
     protected function dbConnect()
     {
+        $config = new Config();
         try
         {
-            $db = new PDO('mysql:host=127.0.0.1;dbname=ocp3;charset=utf8', 'ocp3', 'Tinfoil-jobs-crucial-neff-pagan-privacy2', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+            $db = new PDO('mysql:host=' . $config->getDBHost() . ';dbname=' . $config->getDBName() . ';charset=utf8', $config->getDBUser(), $config->getDBPassword(), array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
             return $db;
         }
         catch (Exception $e)
