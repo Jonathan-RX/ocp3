@@ -1,2 +1,10 @@
 src/config/Config.php
 /src/config/Config.php
+/vendor/*
+vendor/*
+/composer.json
+composer.json
+/composer.phar
+composer.phar
+/composer.lock
+composer.lock
