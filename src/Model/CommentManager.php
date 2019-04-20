@@ -77,7 +77,7 @@ class CommentManager extends DbManager
      * @return bool True on success, false on error
      */
     public function unmoderateComment($commentId){
-        $request = $this->db->prepare('UPDATE comments set moderate = 0 WHERE id=?');
+        $request = self::dbConnect()->prepare('UPDATE comments set moderate = 0 WHERE id=?');
         $results = $request->execute([$commentId]);
         return $results;
     }

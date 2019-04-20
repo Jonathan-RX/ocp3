@@ -35,13 +35,13 @@ if($countComs > 1){$count = $countComs . ' Commentaires';}else{$count = $countCo
             foreach($chapter->getComments() as $c) :       
     ?>
     <div class="panel panel-default">
-            <div class="panel-heading"><b>Le <?= $c->getDateAdd(); ?> par <?= $c->getAuthor(); ?></b> <a href="/chapitre/<?=  $chapter->getSlug(); ?>/reportComment=<?= $c->getId(); ?>" onclick="return confirm('Etes-vous sur de vouloir signaler ce commentaire?')" title="Signaler ce commentaire"><i class="ion-alert-circled pull-right"></i></a></div>
+            <div class="panel-heading"><b>Le <?= $c->getDateAdd(); ?> par <?= htmlspecialchars ($c->getAuthor()); ?></b> <a href="/chapitre/<?=  $chapter->getSlug(); ?>/reportComment=<?= $c->getId(); ?>" onclick="return confirm('Etes-vous sur de vouloir signaler ce commentaire?')" title="Signaler ce commentaire"><i class="ion-alert-circled pull-right"></i></a></div>
         <div class="panel-body">
             <?php
                 if($c->getModerate() === '1'){
                     echo '<i class="text-danger">Le contenu de ce commentaire à été modéré.</i>';
                 }else{
-                    echo $c->getComment(); 
+                    echo htmlspecialchars($c->getComment()); 
                 }
             ?>
         </div>

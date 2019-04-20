@@ -25,10 +25,11 @@ class PostCommentController{
                 $comment->setPostId($_POST['postId']);
                 $comment->setAuthor($_POST['author']);
                 $comment->setComment($_POST['comment']);
-                $request = $data->addComment($comment);
-                if($request != false){
+                $result = $data->addComment($comment);
+                if($result){
                     PHPSession::set('addComment', '<div class="alert alert-success">Le commentaire à bien été ajouté.</div>');
                     header('Location: /chapitre/' . $c->getSlug() . '#comments');
+                    exit;
                 }
             }
                 PHPSession::set('addComment', '<div class="alert alert-warning">Impossible d\'ajouter le commentaire. Veuillez vérifier les informations que vous avez saisies.</div>');

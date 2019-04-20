@@ -13,7 +13,7 @@ ob_start();
                 </div>
                 <div class="card-body">
                   <p><?= $c->getComment(); ?></p>
-                  <a href="/admin/commentaire/autoriser/<?= $c->getId(); ?>/commentaires-moderes" class="card-link" data-toggle="tooltip" title="Cacher le contenu du commentaire"><i class="fas fa-check-square"></i> Restaurer</a>
+                  <a href="/admin/commentaire/autoriser/<?= $c->getId(); ?>/commentaires-moderes" class="card-link" data-toggle="tooltip" title="Montrer le contenu du commentaire"><i class="fas fa-check-square"></i> Restaurer</a>
                   <a href="/admin/chapitre/<?= $c->getPostId(); ?>" class="card-link" data-toggle="tooltip" title="Voir le chapitre"><i class="fas fa-search"></i></i> Voir le chapitre</a>
                 </div>
             </div>
