@@ -16,6 +16,7 @@ class Config{
     private $smtpPort       =   '587';
 
     private $captchaSecret  =   '';
+    private $captchaPublic  =   '';
 
     /**
      * Get database Host parameter
@@ -116,5 +117,14 @@ class Config{
      */
     public function getCaptchaSecret(){
         return $this->captchaSecret;
+    }
+
+    /**
+     * Get publi google captcha key
+     *
+     * @return string Key
+     */
+    public function getCaptchaPublic(){
+        return $this->captchaPublic;
     }
 }

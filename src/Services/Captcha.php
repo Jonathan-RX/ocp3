@@ -35,7 +35,9 @@ class Captcha{
      * @return string Div for captcha box
      */
     public static function getCaptchaInput(){
-        return '<div class="g-recaptcha" data-sitekey="6Lc135oUAAAAAOeE3SHlgPI3BfWP6ysBtz7CsXFB"></div>';
+        $config = new Config();
+        $public = $config->getCaptchaPublic();
+        return '<div class="g-recaptcha" data-sitekey="' . $public . '"></div>';
     }
 
     /**
