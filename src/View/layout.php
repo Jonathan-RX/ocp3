@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 	<head>
 		<title><?= $title; ?></title>
 
@@ -21,11 +21,11 @@
 				<div class="row">
 					<div class="col-md-4 col-sm-5 col-xs-8">
 						<div class="logo">
-							<h1><a href="/"><b>Jean</b> Forteroche</a></h1>
+							<h2><a href="/"><b>Jean</b> Forteroche</a></h2>
 						</div>
 					</div><!-- col-md-4 -->
 					<div class="col-md-8 col-sm-7 col-xs-4">
-						<nav class="main-nav" role="navigation">
+						<nav class="main-nav">
 							<div class="navbar-header">
   								<button type="button" id="trigger-overlay" class="navbar-toggle">
     								<span class="ion-navicon"></span>

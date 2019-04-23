@@ -3,7 +3,7 @@
 namespace App\Controller\Chapter;
 
 use App\Model\ChapterManager;
-use App\Controller\Error\ErrorChapterController;
+use App\Controller\ErrorChapter\ErrorChapterController;
 
 class ChapterController {
     /**

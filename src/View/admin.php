@@ -42,7 +42,7 @@
             <li><a href="/admin/nouveau-chapitre"><i class="fas fa-fw fa-file-alt"></i> Nouveau Chapitre</a></li>
             <li><a href="/admin/chapitres"><i class="fas fa-fw fa-file"></i> Chapitres</a></li>
             <li><a href="/admin/commentaires"><i class="fas fa-comments"></i> Commentaires</a></li>
-            <li><a href="/admin/commentaires-moderes"><i class="fas fa-comment-slash"></i></i> Commentaires modérés</a></li>
+            <li><a href="/admin/commentaires-moderes"><i class="fas fa-comment-slash"></i> Commentaires modérés</a></li>
         </ul>
     </div>
 

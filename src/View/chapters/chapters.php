@@ -35,7 +35,7 @@ $count = 0;
 ?>
 <h3 class="entry-title">Pages</h3>
 <ul class="pages">
-		<li><a href="/chapitres/1"><<</a></li>	
+		<li><a href="/chapitres/1">&lt;&lt;</a></li>	
 <?php
 while($count < $nbrPages){
 	$count++;
@@ -50,7 +50,7 @@ while($count < $nbrPages){
 	}
 }
 ?>
-		<li><a href="/chapitres/<?= ceil($nbrPages); ?>">>></a></li>	
+		<li><a href="/chapitres/<?= ceil($nbrPages); ?>">&#62;&#62;</a></li>	
 </ul>
 <?php
 $title = 'Liste des chapitres';

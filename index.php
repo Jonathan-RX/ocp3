@@ -50,5 +50,6 @@ $router->get('/admin/commentaires-moderes', "AdminCommentsModerates#adminComment
 
 
 $router->get('/:unknow', "Error#pageUnknow")->with('unknow', '([a-z\-0-9\-/]+)');
+$router->post('/:unknow', "Error#pageUnknow")->with('unknow', '([a-z\-0-9\-/]+)');
 
 $router->run();
