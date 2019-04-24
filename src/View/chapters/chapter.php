@@ -65,7 +65,7 @@ if($countComs > 1){$count = $countComs . ' Commentaires';}else{$count = $countCo
     </header>
     <div class="panel panel-default">
         <div class="panel-body">
-            <form action="" method="POST" class="form-group">
+            <form action="/chapitre/<?=  $chapter->getSlug(); ?>" method="POST" class="form-group">
                 <label for="author">Pseudonyme :</label>
                 <input type="text" name="author" id="author" class="form-control" /><br /> 
                 <label for="comment">Votre commentaire :</label>
