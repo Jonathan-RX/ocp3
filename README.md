@@ -27,8 +27,8 @@ Installation
 -
 
 The project integrates composing with an autoloader in PSR-4 and phpmailer.
-- [Composer](https://getcomposer.org/)
-- [Phpmailer](https://packagist.org/packages/phpmailer/phpmailer)
+- [Composer](https://github.com/composer/composer)
+- [Phpmailer](https://github.com/PHPMailer/PHPMailer)
 
 1. Clone Github repository
 > git clone https://github.com/Jonathan-RX/ocp3.git .
