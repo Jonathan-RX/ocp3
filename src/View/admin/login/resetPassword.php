@@ -12,7 +12,7 @@ ob_start();
                                 <input type="text" class="form-control" placeholder="Adresse mail" name="email">
                             </div>
 
-                            <div class="row mt-3">
+                            <div class="row mt-2 mb-3">
                                 <div class="col pr-2">
                                 <?= \App\Services\Captcha::getCaptchaInput(); ?>
                                 </div>

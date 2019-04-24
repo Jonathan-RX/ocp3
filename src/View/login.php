@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/public/css/bootstrap.4.1.1.min.css">
     <link rel="stylesheet" href="/public/css/fontawesome-all.min.css">
     <link rel="stylesheet" href="/public/css/bootadmin.min.css">
+    <link rel="stylesheet" href="/public/css/admin.css">
 
     <title>Login | Administration</title>
 </head>
@@ -15,7 +16,7 @@
 
         <div class="container h-100">
         <div class="row h-100 justify-content-center align-items-center">
-            <div class="col-md-4">
+            <div class="col-md-7">
                 <h1 class="text-center mb-4"><?= $title; ?></h1>
                 <?= \App\Services\PHPSession::get('flash'); ?>
                 <div class="card">
